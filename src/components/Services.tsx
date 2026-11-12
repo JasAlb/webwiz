@@ -25,10 +25,24 @@ const iconMap: Record<string, React.ReactNode> = {
   RefreshCw: <RefreshCw className="w-5 h-5 text-accent" />
 };
 
-export const Services: React.FC = () => {
+interface ServicesProps {
+  onNavigateService?: (slug: string) => void;
+}
+
+const serviceSlugMap: Record<string, string> = {
+  'web-development': 'website-development',
+  'ecommerce': 'ecommerce-development',
+  'ui-ux-design': 'ui-ux-design',
+  'web-applications': 'web-applications',
+  'seo-optimization': 'seo-optimization',
+  'website-redesign': 'website-redesign'
+};
+
+export const Services: React.FC<ServicesProps> = ({ onNavigateService }) => {
   const [selectedServiceId, setSelectedServiceId] = useState(SERVICES_DATA[0].id);
 
   const selectedService = SERVICES_DATA.find((s) => s.id === selectedServiceId) || SERVICES_DATA[0];
+  const serviceSlug = serviceSlugMap[selectedService.id] || 'website-development';
 
   const handleSelectServiceForContact = (serviceTitle: string) => {
     const contactSection = document.getElementById('contact');
@@ -36,6 +50,19 @@ export const Services: React.FC = () => {
       contactSection.scrollIntoView({ behavior: 'smooth' });
       // Dispatch custom event to preselect service in contact form
       window.dispatchEvent(new CustomEvent('selectService', { detail: serviceTitle }));
+    }
+  };
+
+  const handleServicePageClick = (e: React.MouseEvent<HTMLAnchorElement>, slug: string) => {
+    if (e.metaKey || e.ctrlKey || e.shiftKey || e.button !== 0) {
+      return;
+    }
+    e.preventDefault();
+    if (onNavigateService) {
+      onNavigateService(slug);
+    } else {
+      window.history.pushState({}, '', `/services/${slug}`);
+      window.dispatchEvent(new PopStateEvent('popstate'));
     }
   };
 
@@ -234,14 +261,26 @@ export const Services: React.FC = () => {
                     ))}
                   </div>
 
-                  <button
-                    onClick={() => handleSelectServiceForContact(selectedService.title)}
-                    data-cursor="pointer"
-                    className="inline-flex items-center gap-2 text-xs sm:text-sm font-semibold text-accent-soft hover:text-white transition-colors group shrink-0"
-                  >
-                    <span>Request {selectedService.title}</span>
-                    <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-                  </button>
+                  <div className="flex items-center gap-4 shrink-0">
+                    <a
+                      href={`/services/${serviceSlug}`}
+                      onClick={(e) => handleServicePageClick(e, serviceSlug)}
+                      data-cursor="pointer"
+                      className="inline-flex items-center gap-1.5 text-xs text-text-muted hover:text-accent-soft transition-colors"
+                    >
+                      <span>Full Specifications</span>
+                      <ArrowRight className="w-3.5 h-3.5" />
+                    </a>
+
+                    <button
+                      onClick={() => handleSelectServiceForContact(selectedService.title)}
+                      data-cursor="pointer"
+                      className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent hover:bg-accent-hover text-white text-xs sm:text-sm font-semibold transition-all shadow-[0_0_15px_rgba(139,92,246,0.3)] group"
+                    >
+                      <span>Request {selectedService.title}</span>
+                      <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+                    </button>
+                  </div>
                 </div>
               </motion.div>
             </AnimatePresence>

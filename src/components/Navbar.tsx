@@ -3,10 +3,11 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, ArrowUpRight, Sparkles, MessageSquare, Phone } from 'lucide-react';
 
 interface NavbarProps {
-  onOpenContact?: () => void;
+  isSubpage?: boolean;
+  onNavigateHome?: (hash?: string) => void;
 }
 
-export const Navbar: React.FC<NavbarProps> = () => {
+export const Navbar: React.FC<NavbarProps> = ({ isSubpage = false, onNavigateHome }) => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('hero');
@@ -17,10 +18,14 @@ export const Navbar: React.FC<NavbarProps> = () => {
     { name: 'Work', href: '#work' },
     { name: 'About', href: '#about' },
     { name: 'Process', href: '#process' },
+    { name: 'Insights', href: '#insights' },
+    { name: 'FAQs', href: '#faqs' },
     { name: 'Contact', href: '#contact' },
   ];
 
   useEffect(() => {
+    if (isSubpage) return;
+
     const handleScroll = () => {
       if (window.scrollY > 40) {
         setScrolled(true);
@@ -29,7 +34,7 @@ export const Navbar: React.FC<NavbarProps> = () => {
       }
 
       // Determine active section
-      const sections = ['hero', 'services', 'work', 'about', 'why-us', 'process', 'contact'];
+      const sections = ['hero', 'services', 'work', 'about', 'why-us', 'process', 'insights', 'faqs', 'contact'];
       for (const sectionId of sections) {
         const el = document.getElementById(sectionId);
         if (el) {
@@ -44,11 +49,17 @@ export const Navbar: React.FC<NavbarProps> = () => {
 
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [isSubpage]);
 
-  const handleScrollTo = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     e.preventDefault();
     setMobileMenuOpen(false);
+
+    if (isSubpage && onNavigateHome) {
+      onNavigateHome(href);
+      return;
+    }
+
     const target = document.querySelector(href);
     if (target) {
       target.scrollIntoView({ behavior: 'smooth' });
@@ -59,7 +70,7 @@ export const Navbar: React.FC<NavbarProps> = () => {
     <>
       <header
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-          scrolled
+          scrolled || isSubpage
             ? 'py-3.5 bg-[#08090D]/85 backdrop-blur-xl border-b border-white/[0.08] shadow-[0_10px_30px_rgba(0,0,0,0.5)]'
             : 'py-6 bg-transparent'
         }`}
@@ -67,13 +78,12 @@ export const Navbar: React.FC<NavbarProps> = () => {
         <div className="max-w-7xl mx-auto px-6 sm:px-8 flex items-center justify-between">
           {/* Brand Logo */}
           <a
-            href="#hero"
-            onClick={(e) => handleScrollTo(e, '#hero')}
+            href="/"
+            onClick={(e) => handleNavClick(e, '#hero')}
             className="group flex items-center gap-3 select-none"
             data-cursor="pointer"
           >
             <div className="relative w-10 h-10 rounded-xl bg-gradient-to-br from-accent/30 to-accent-soft/10 border border-accent/40 flex items-center justify-center overflow-hidden transition-all duration-300 group-hover:border-accent group-hover:shadow-[0_0_20px_rgba(139,92,246,0.4)]">
-              {/* Inner geometric glyph */}
               <div className="absolute inset-0 bg-gradient-to-tr from-accent/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               <svg
                 width="22"
@@ -103,15 +113,15 @@ export const Navbar: React.FC<NavbarProps> = () => {
           </a>
 
           {/* Desktop Navigation Links */}
-          <nav className="hidden md:flex items-center gap-1 px-4 py-1.5 rounded-full bg-white/[0.03] border border-white/[0.08] backdrop-blur-md">
+          <nav className="hidden lg:flex items-center gap-0.5 px-3 py-1.5 rounded-full bg-white/[0.03] border border-white/[0.08] backdrop-blur-md">
             {navLinks.map((link) => {
-              const isActive = activeSection === link.href.replace('#', '');
+              const isActive = !isSubpage && activeSection === link.href.replace('#', '');
               return (
                 <a
                   key={link.name}
                   href={link.href}
-                  onClick={(e) => handleScrollTo(e, link.href)}
-                  className={`relative px-4 py-2 text-sm font-medium transition-all duration-200 rounded-full select-none ${
+                  onClick={(e) => handleNavClick(e, link.href)}
+                  className={`relative px-3.5 py-1.5 text-xs font-medium transition-all duration-200 rounded-full select-none ${
                     isActive
                       ? 'text-white'
                       : 'text-text-secondary hover:text-white'
@@ -134,21 +144,21 @@ export const Navbar: React.FC<NavbarProps> = () => {
           </nav>
 
           {/* Right Actions: Availability Badge + Primary CTA */}
-          <div className="hidden lg:flex items-center gap-4">
-            <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/[0.02] border border-white/[0.06] text-xs font-mono text-text-secondary">
+          <div className="hidden sm:flex items-center gap-3">
+            <div className="hidden xl:flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/[0.02] border border-white/[0.06] text-xs font-mono text-text-secondary">
               <span className="relative flex h-2 w-2">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
               </span>
-              <span>Available for Q2/Q3</span>
+              <span>Available for Projects</span>
             </div>
 
             <a
               href="#contact"
-              onClick={(e) => handleScrollTo(e, '#contact')}
+              onClick={(e) => handleNavClick(e, '#contact')}
               data-magnetic
               data-cursor="pointer"
-              className="group relative inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white text-[#08090D] font-medium text-sm transition-all duration-300 hover:bg-accent-soft hover:shadow-[0_0_25px_rgba(139,92,246,0.5)] active:scale-95"
+              className="group relative inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white text-[#08090D] font-medium text-xs sm:text-sm transition-all duration-300 hover:bg-accent-soft hover:shadow-[0_0_25px_rgba(139,92,246,0.5)] active:scale-95"
             >
               <span>Start Project</span>
               <ArrowUpRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
@@ -156,15 +166,7 @@ export const Navbar: React.FC<NavbarProps> = () => {
           </div>
 
           {/* Mobile Menu Button */}
-          <div className="flex md:hidden items-center gap-3">
-            <a
-              href="#contact"
-              onClick={(e) => handleScrollTo(e, '#contact')}
-              className="px-3.5 py-1.5 rounded-full bg-accent text-white text-xs font-medium"
-            >
-              Let's Talk
-            </a>
-
+          <div className="flex lg:hidden items-center gap-2">
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               className="w-10 h-10 rounded-xl bg-white/[0.05] border border-white/[0.1] flex items-center justify-center text-white focus:outline-none"
@@ -184,11 +186,11 @@ export const Navbar: React.FC<NavbarProps> = () => {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.25 }}
-            className="fixed inset-0 z-40 bg-[#08090D]/95 backdrop-blur-2xl pt-24 px-6 pb-8 flex flex-col justify-between md:hidden"
+            className="fixed inset-0 z-40 bg-[#08090D]/95 backdrop-blur-2xl pt-24 px-6 pb-8 flex flex-col justify-between lg:hidden overflow-y-auto"
           >
-            <div className="flex flex-col gap-2">
-              <div className="pb-4 mb-4 border-b border-white/[0.08] flex items-center justify-between">
-                <span className="text-xs font-mono uppercase tracking-widest text-text-muted">Navigation Menu</span>
+            <div className="flex flex-col gap-1">
+              <div className="pb-3 mb-2 border-b border-white/[0.08] flex items-center justify-between">
+                <span className="text-xs font-mono uppercase tracking-widest text-text-muted">Studio Directory</span>
                 <span className="flex items-center gap-2 text-xs font-mono text-emerald-400">
                   <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
                   Booking Projects
@@ -196,18 +198,15 @@ export const Navbar: React.FC<NavbarProps> = () => {
               </div>
 
               {navLinks.map((link, index) => (
-                <motion.a
+                <a
                   key={link.name}
                   href={link.href}
-                  onClick={(e) => handleScrollTo(e, link.href)}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: index * 0.05 + 0.1 }}
-                  className="py-3 text-2xl font-display font-semibold text-white hover:text-accent flex items-center justify-between border-b border-white/[0.04]"
+                  onClick={(e) => handleNavClick(e, link.href)}
+                  className="py-2.5 text-xl font-display font-semibold text-white hover:text-accent flex items-center justify-between border-b border-white/[0.04]"
                 >
                   <span>{link.name}</span>
                   <span className="text-xs font-mono text-text-muted">0{index + 1}</span>
-                </motion.a>
+                </a>
               ))}
             </div>
 
@@ -248,7 +247,7 @@ export const Navbar: React.FC<NavbarProps> = () => {
 
                 <a
                   href="#contact"
-                  onClick={(e) => handleScrollTo(e, '#contact')}
+                  onClick={(e) => handleNavClick(e, '#contact')}
                   className="flex items-center justify-center gap-2 py-3 rounded-xl bg-accent text-white text-sm font-medium shadow-[0_0_20px_rgba(139,92,246,0.3)]"
                 >
                   <Sparkles className="w-4 h-4" />

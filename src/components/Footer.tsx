@@ -1,8 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { ArrowUp, MessageSquare, Mail, Phone } from 'lucide-react';
-import { SERVICES_DATA } from '../data/agencyData';
+import { ArrowUp, MessageSquare, Mail, Phone, Globe2, BookOpen } from 'lucide-react';
+import { SERVICE_PAGES_DATA, ARTICLES_DATA } from '../data/seoData';
 
-export const Footer: React.FC = () => {
+interface FooterProps {
+  onNavigate?: (path: string) => void;
+}
+
+export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
   const [currentTime, setCurrentTime] = useState('');
 
   useEffect(() => {
@@ -28,13 +32,35 @@ export const Footer: React.FC = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  const handleScrollTo = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
-    e.preventDefault();
-    const target = document.querySelector(href);
-    if (target) {
-      target.scrollIntoView({ behavior: 'smooth' });
+  const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, path: string) => {
+    if (path.startsWith('#')) {
+      e.preventDefault();
+      if (onNavigate) {
+        onNavigate(path);
+      } else {
+        const target = document.querySelector(path);
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth' });
+        }
+      }
+    } else if (path.startsWith('/')) {
+      if (e.metaKey || e.ctrlKey || e.shiftKey || e.button !== 0) {
+        return; // Allow new tab opens
+      }
+      e.preventDefault();
+      if (onNavigate) {
+        onNavigate(path);
+      } else {
+        window.history.pushState({}, '', path);
+        window.dispatchEvent(new PopStateEvent('popstate'));
+      }
     }
   };
+
+  const serviceLinks = Object.values(SERVICE_PAGES_DATA).map((s) => ({
+    title: s.title,
+    href: `/services/${s.slug}`
+  }));
 
   return (
     <footer className="relative bg-[#050608] border-t border-white/[0.08] pt-20 pb-12 px-6 sm:px-8 overflow-hidden text-text-secondary">
@@ -44,9 +70,13 @@ export const Footer: React.FC = () => {
       <div className="max-w-7xl mx-auto relative z-10">
         {/* Main Footer Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 pb-16 border-b border-white/[0.08]">
-          {/* Brand Column */}
-          <div className="lg:col-span-5 space-y-6">
-            <a href="#hero" onClick={(e) => handleScrollTo(e, '#hero')} className="flex items-center gap-3">
+          {/* Brand & Geographic Service Area Column */}
+          <div className="lg:col-span-4 space-y-6">
+            <a
+              href="/"
+              onClick={(e) => handleLinkClick(e, '#hero')}
+              className="flex items-center gap-3"
+            >
               <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-accent/30 to-accent-soft/10 border border-accent/40 flex items-center justify-center">
                 <svg
                   width="22"
@@ -72,8 +102,19 @@ export const Footer: React.FC = () => {
             </a>
 
             <p className="text-sm text-text-secondary font-light max-w-sm leading-relaxed">
-              We transform ambitious ideas into powerful digital experiences. Award-winning web development, bespoke UI/UX design, and scalable web apps engineered to help businesses grow.
+              We transform ambitious ideas into powerful digital experiences. Custom website development, high-converting e-commerce, web applications, and bespoke UI/UX design engineered for scalable business growth.
             </p>
+
+            {/* Service Area Badge */}
+            <div className="p-3.5 rounded-xl bg-white/[0.02] border border-white/[0.06] space-y-1.5 text-xs">
+              <div className="flex items-center gap-2 text-white font-medium">
+                <Globe2 className="w-3.5 h-3.5 text-accent" />
+                <span>Service Regions & Availability</span>
+              </div>
+              <p className="text-text-muted leading-relaxed text-[11px]">
+                Serving businesses across India — Bengaluru, Mumbai, Delhi NCR, Hyderabad, Chennai, Kochi — and global clients worldwide.
+              </p>
+            </div>
 
             <div className="flex items-center gap-3 text-xs font-mono">
               <span className="flex h-2 w-2 relative">
@@ -88,93 +129,124 @@ export const Footer: React.FC = () => {
           {/* Navigation Links Column */}
           <div className="lg:col-span-2 space-y-4">
             <h4 className="text-xs font-mono uppercase tracking-wider text-white font-semibold">
-              Navigation
+              Explore
             </h4>
             <ul className="space-y-2.5 text-sm">
-              {['Home', 'Services', 'Work', 'About', 'Process', 'Contact'].map((item) => (
-                <li key={item}>
+              {[
+                { name: 'Home', href: '#hero' },
+                { name: 'Services', href: '#services' },
+                { name: 'Work', href: '#work' },
+                { name: 'About', href: '#about' },
+                { name: 'Process', href: '#process' },
+                { name: 'Insights', href: '#insights' },
+                { name: 'FAQs', href: '#faqs' },
+                { name: 'Contact', href: '#contact' },
+              ].map((item) => (
+                <li key={item.name}>
                   <a
-                    href={`#${item.toLowerCase()}`}
-                    onClick={(e) => handleScrollTo(e, `#${item.toLowerCase()}`)}
+                    href={item.href}
+                    onClick={(e) => handleLinkClick(e, item.href)}
                     className="text-text-secondary hover:text-white transition-colors"
                   >
-                    {item}
+                    {item.name}
                   </a>
                 </li>
               ))}
             </ul>
           </div>
 
-          {/* Services Links Column */}
+          {/* Services Deep Dive Column */}
           <div className="lg:col-span-3 space-y-4">
             <h4 className="text-xs font-mono uppercase tracking-wider text-white font-semibold">
-              Capabilities
+              Services & Capabilities
             </h4>
             <ul className="space-y-2.5 text-sm">
-              {SERVICES_DATA.map((srv) => (
-                <li key={srv.id}>
+              {serviceLinks.map((srv) => (
+                <li key={srv.href}>
                   <a
-                    href="#services"
-                    onClick={(e) => handleScrollTo(e, '#services')}
-                    className="text-text-secondary hover:text-accent-soft transition-colors line-clamp-1"
+                    href={srv.href}
+                    onClick={(e) => handleLinkClick(e, srv.href)}
+                    className="text-text-secondary hover:text-accent-soft transition-colors line-clamp-1 flex items-center justify-between group"
                   >
-                    {srv.title}
+                    <span className="group-hover:translate-x-0.5 transition-transform">{srv.title}</span>
                   </a>
                 </li>
               ))}
             </ul>
           </div>
 
-          {/* Contact Direct Column */}
-          <div className="lg:col-span-2 space-y-4">
-            <h4 className="text-xs font-mono uppercase tracking-wider text-white font-semibold">
-              Direct Contact
-            </h4>
-            <ul className="space-y-2.5 text-xs">
-              <li>
-                <a
-                  href="mailto:jassimalbin@gmail.com"
-                  className="flex items-center gap-2 text-text-secondary hover:text-white transition-colors group"
-                >
-                  <Mail className="w-4 h-4 text-accent shrink-0" />
-                  <span className="font-mono group-hover:underline">jassimalbin@gmail.com</span>
-                </a>
-              </li>
-              <li>
-                <a
-                  href="tel:+919495068217"
-                  className="flex items-center gap-2 text-text-secondary hover:text-white transition-colors group"
-                >
-                  <Phone className="w-4 h-4 text-accent shrink-0" />
-                  <span className="font-mono">+91 94950 68217</span>
-                </a>
-              </li>
-              <li>
-                <a
-                  href="tel:+919746859565"
-                  className="flex items-center gap-2 text-text-secondary hover:text-white transition-colors group"
-                >
-                  <Phone className="w-4 h-4 text-accent-soft shrink-0" />
-                  <span className="font-mono">+91 97468 59565</span>
-                </a>
-              </li>
-              <li>
-                <a
-                  href="https://wa.me/qr/5KENGAMJCDTUH1?s=r"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label="Chat with WebWizards on WhatsApp"
-                  className="flex items-center gap-2 text-emerald-400 hover:text-emerald-300 transition-colors"
-                >
-                  <MessageSquare className="w-4 h-4 shrink-0" />
-                  <span className="font-mono">WhatsApp Official</span>
-                </a>
-              </li>
-            </ul>
+          {/* Direct Contact & Insights Column */}
+          <div className="lg:col-span-3 space-y-6">
+            <div className="space-y-3">
+              <h4 className="text-xs font-mono uppercase tracking-wider text-white font-semibold">
+                Direct Contact
+              </h4>
+              <ul className="space-y-2.5 text-xs">
+                <li>
+                  <a
+                    href="mailto:jassimalbin@gmail.com"
+                    className="flex items-center gap-2 text-text-secondary hover:text-white transition-colors group"
+                  >
+                    <Mail className="w-4 h-4 text-accent shrink-0" />
+                    <span className="font-mono group-hover:underline">jassimalbin@gmail.com</span>
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="tel:+919495068217"
+                    className="flex items-center gap-2 text-text-secondary hover:text-white transition-colors group"
+                  >
+                    <Phone className="w-4 h-4 text-accent shrink-0" />
+                    <span className="font-mono">+91 94950 68217</span>
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="tel:+919746859565"
+                    className="flex items-center gap-2 text-text-secondary hover:text-white transition-colors group"
+                  >
+                    <Phone className="w-4 h-4 text-accent-soft shrink-0" />
+                    <span className="font-mono">+91 97468 59565</span>
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="https://wa.me/qr/5KENGAMJCDTUH1?s=r"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Chat with WebWizards on WhatsApp"
+                    className="flex items-center gap-2 text-emerald-400 hover:text-emerald-300 transition-colors"
+                  >
+                    <MessageSquare className="w-4 h-4 shrink-0" />
+                    <span className="font-mono">WhatsApp Official Chat</span>
+                  </a>
+                </li>
+              </ul>
+            </div>
+
+            {/* Knowledge Base Articles */}
+            <div className="space-y-2 pt-2 border-t border-white/[0.06]">
+              <h5 className="text-[11px] font-mono uppercase tracking-wider text-text-muted flex items-center gap-1.5">
+                <BookOpen className="w-3.5 h-3.5 text-accent-soft" />
+                Featured Insights
+              </h5>
+              <ul className="space-y-1.5 text-xs">
+                {ARTICLES_DATA.map((art) => (
+                  <li key={art.slug}>
+                    <a
+                      href={`/insights/${art.slug}`}
+                      onClick={(e) => handleLinkClick(e, `/insights/${art.slug}`)}
+                      className="text-text-muted hover:text-accent-soft transition-colors line-clamp-1 block text-[12px]"
+                    >
+                      {art.title}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
 
             {/* Social Icons */}
             <div className="pt-2 flex items-center gap-2.5">
-              {/* GitHub */}
               <a
                 href="https://github.com"
                 target="_blank"
@@ -187,7 +259,6 @@ export const Footer: React.FC = () => {
                 </svg>
               </a>
 
-              {/* X / Twitter */}
               <a
                 href="https://x.com"
                 target="_blank"
@@ -200,7 +271,6 @@ export const Footer: React.FC = () => {
                 </svg>
               </a>
 
-              {/* LinkedIn */}
               <a
                 href="https://linkedin.com"
                 target="_blank"
@@ -213,7 +283,6 @@ export const Footer: React.FC = () => {
                 </svg>
               </a>
 
-              {/* Instagram */}
               <a
                 href="https://instagram.com"
                 target="_blank"
