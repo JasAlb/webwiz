@@ -7,7 +7,6 @@ import {
   Send,
   MessageSquare,
   Mail,
-  Phone,
   CheckCircle2,
   AlertCircle,
   Copy,
@@ -74,7 +73,7 @@ export const Contact: React.FC = () => {
     return `Client Full Name: ${formData.fullName}
 Business Name: ${formData.businessName || 'Not specified'}
 Email Address: ${formData.email}
-Phone / WhatsApp: ${formData.phone || 'Not specified'}
+WhatsApp (Optional): ${formData.phone || 'Not specified'}
 Service Required: ${formData.service}
 Budget Tier: ${formData.budget}
 
@@ -150,108 +149,98 @@ ${formData.description}`;
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
           {/* Left Column: Direct Agency Channels & Guarantees */}
           <div className="lg:col-span-5 flex flex-col gap-6">
-            <div className="p-8 rounded-3xl bg-[#11131A]/80 border border-white/[0.08] backdrop-blur-xl space-y-4">
+            <div className="p-8 rounded-3xl bg-[#11131A]/80 border border-white/[0.08] backdrop-blur-xl space-y-5">
               <div>
                 <h3 className="font-display font-bold text-xl text-white mb-1">
-                  Fast-Track Direct Inquiries
+                  Official Contact Channels
                 </h3>
                 <p className="text-xs text-text-secondary font-light">
-                  Direct channels to our senior studio engineering team.
+                  Connect directly with our engineering and design leads.
                 </p>
               </div>
 
-              {/* WhatsApp Official Card */}
-              <a
-                href="https://wa.me/qr/5KENGAMJCDTUH1?s=r"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Chat with WebWizards on WhatsApp"
-                data-cursor="pointer"
-                className="flex items-center justify-between p-4 rounded-2xl bg-emerald-500/10 border border-emerald-500/25 hover:border-emerald-500/50 text-emerald-400 transition-all group"
-              >
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-xl bg-emerald-500/20 flex items-center justify-center text-emerald-300">
+              {/* OPTION 1: WhatsApp Chat */}
+              <div className="p-5 rounded-2xl bg-emerald-500/[0.07] border border-emerald-500/20 hover:border-emerald-500/40 transition-all space-y-3">
+                <div className="flex items-start gap-3.5">
+                  <div className="w-10 h-10 rounded-xl bg-emerald-500/20 flex items-center justify-center text-emerald-400 shrink-0 mt-0.5">
                     <MessageSquare className="w-5 h-5" />
                   </div>
-                  <div>
-                    <span className="text-sm font-semibold text-white block group-hover:text-emerald-300 transition-colors">
-                      Official WhatsApp Link
-                    </span>
-                    <span className="text-xs text-emerald-400 font-mono">Chat instantly with engineers</span>
+                  <div className="flex-1">
+                    <div className="flex items-center justify-between">
+                      <span className="text-sm font-semibold text-white">WhatsApp Chat</span>
+                      <span className="text-[10px] font-mono text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded-full border border-emerald-500/20">
+                        Fastest Response
+                      </span>
+                    </div>
+                    <p className="text-xs text-text-secondary mt-1">
+                      Have a project in mind? Let's discuss it.
+                    </p>
                   </div>
                 </div>
-                <ArrowRight className="w-4 h-4 text-emerald-400 transform group-hover:translate-x-1 transition-transform" />
-              </a>
 
-              {/* Email Direct Card */}
-              <div className="p-4 rounded-2xl bg-white/[0.02] border border-white/[0.06] hover:border-white/[0.15] text-white transition-all group flex items-center justify-between">
                 <a
-                  href="mailto:jassimalbin@gmail.com"
-                  className="flex items-center gap-3 flex-1 overflow-hidden"
+                  href="https://wa.me/qr/5KENGAMJCDTUH1?s=r"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Chat with us on WhatsApp"
                   data-cursor="pointer"
+                  className="w-full inline-flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-[#08090D] font-semibold text-xs transition-all shadow-[0_0_15px_rgba(16,185,129,0.25)]"
                 >
-                  <div className="w-10 h-10 rounded-xl bg-white/[0.05] flex items-center justify-center text-accent shrink-0">
-                    <Mail className="w-5 h-5" />
-                  </div>
-                  <div className="overflow-hidden">
-                    <span className="text-sm font-semibold text-white block">Official Studio Email</span>
-                    <span className="text-xs text-accent-soft font-mono hover:underline truncate block">
-                      jassimalbin@gmail.com
-                    </span>
-                  </div>
+                  <MessageSquare className="w-4 h-4" />
+                  <span>Chat with us</span>
+                  <ArrowRight className="w-3.5 h-3.5" />
                 </a>
-
-                <button
-                  type="button"
-                  onClick={handleCopyEmail}
-                  className="ml-2 px-3 py-1.5 rounded-lg bg-white/[0.05] hover:bg-white/[0.1] text-xs font-mono text-text-secondary flex items-center gap-1.5 shrink-0"
-                  aria-label="Copy email address"
-                >
-                  {copiedEmail ? (
-                    <>
-                      <Check className="w-3.5 h-3.5 text-emerald-400" />
-                      <span className="text-emerald-400">Copied</span>
-                    </>
-                  ) : (
-                    <>
-                      <Copy className="w-3.5 h-3.5" />
-                      <span>Copy</span>
-                    </>
-                  )}
-                </button>
               </div>
 
-              {/* Phone Direct Cards */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
-                {/* Primary Number */}
-                <a
-                  href="tel:+919495068217"
-                  data-cursor="pointer"
-                  className="p-3.5 rounded-2xl bg-white/[0.02] border border-white/[0.06] hover:border-accent/40 text-white transition-all group block"
-                >
-                  <div className="flex items-center gap-2 mb-1">
-                    <Phone className="w-3.5 h-3.5 text-accent" />
-                    <span className="text-[10px] font-mono uppercase tracking-wider text-text-muted">Primary Phone</span>
+              {/* OPTION 2: Email */}
+              <div className="p-5 rounded-2xl bg-white/[0.02] border border-white/[0.08] hover:border-white/[0.15] transition-all space-y-3">
+                <div className="flex items-start gap-3.5">
+                  <div className="w-10 h-10 rounded-xl bg-white/[0.05] flex items-center justify-center text-accent shrink-0 mt-0.5">
+                    <Mail className="w-5 h-5" />
                   </div>
-                  <div className="text-xs font-mono font-bold text-white group-hover:text-accent-soft transition-colors">
-                    +91 94950 68217
+                  <div className="flex-1">
+                    <span className="text-sm font-semibold text-white block">Official Email</span>
+                    <p className="text-xs text-text-secondary mt-1">
+                      Prefer email? Send us your project requirements.
+                    </p>
+                    <a
+                      href="mailto:jassimalbin@gmail.com"
+                      className="text-xs font-mono text-accent-soft hover:underline block mt-1"
+                    >
+                      jassimalbin@gmail.com
+                    </a>
                   </div>
-                </a>
+                </div>
 
-                {/* Secondary Number */}
-                <a
-                  href="tel:+919746859565"
-                  data-cursor="pointer"
-                  className="p-3.5 rounded-2xl bg-white/[0.02] border border-white/[0.06] hover:border-accent/40 text-white transition-all group block"
-                >
-                  <div className="flex items-center gap-2 mb-1">
-                    <Phone className="w-3.5 h-3.5 text-accent-soft" />
-                    <span className="text-[10px] font-mono uppercase tracking-wider text-text-muted">Secondary Phone</span>
-                  </div>
-                  <div className="text-xs font-mono font-bold text-white group-hover:text-accent-soft transition-colors">
-                    +91 97468 59565
-                  </div>
-                </a>
+                <div className="flex items-center gap-2 pt-1">
+                  <a
+                    href="mailto:jassimalbin@gmail.com"
+                    data-cursor="pointer"
+                    className="flex-1 inline-flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl bg-accent hover:bg-accent-hover text-white font-semibold text-xs transition-all shadow-[0_0_15px_rgba(139,92,246,0.25)]"
+                  >
+                    <Mail className="w-3.5 h-3.5" />
+                    <span>Send an email</span>
+                  </a>
+
+                  <button
+                    type="button"
+                    onClick={handleCopyEmail}
+                    className="px-3 py-2.5 rounded-xl bg-white/[0.04] hover:bg-white/[0.08] text-xs font-mono text-text-secondary flex items-center gap-1.5 transition-colors border border-white/[0.06]"
+                    aria-label="Copy email address"
+                  >
+                    {copiedEmail ? (
+                      <>
+                        <Check className="w-3.5 h-3.5 text-emerald-400" />
+                        <span className="text-emerald-400">Copied</span>
+                      </>
+                    ) : (
+                      <>
+                        <Copy className="w-3.5 h-3.5" />
+                        <span>Copy</span>
+                      </>
+                    )}
+                  </button>
+                </div>
               </div>
             </div>
 
@@ -337,7 +326,7 @@ ${formData.description}`;
                         className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-full bg-emerald-500/20 border border-emerald-500/40 text-emerald-300 text-xs sm:text-sm font-semibold hover:bg-emerald-500/30 transition-colors"
                       >
                         <MessageSquare className="w-4 h-4" />
-                        <span>Chat via WhatsApp</span>
+                        <span>Chat with us on WhatsApp</span>
                       </a>
 
                       <button
@@ -449,16 +438,16 @@ ${formData.description}`;
                         )}
                       </div>
 
-                      {/* Phone / WhatsApp */}
+                      {/* WhatsApp / Preferred Contact (Optional) */}
                       <div>
                         <label className="block text-xs font-mono uppercase text-text-muted mb-2">
-                          Phone / WhatsApp Number
+                          WhatsApp Number <span className="text-text-muted text-[10px] lowercase">(optional)</span>
                         </label>
                         <input
-                          type="tel"
+                          type="text"
                           value={formData.phone}
                           onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                          placeholder="+91 94950 68217"
+                          placeholder="Your WhatsApp number for quick project follow-up"
                           className="w-full px-4 py-3 rounded-xl bg-[#08090D] border border-white/[0.1] focus:border-accent text-white text-sm focus:outline-none transition-colors"
                         />
                       </div>

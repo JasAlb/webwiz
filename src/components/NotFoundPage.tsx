@@ -43,7 +43,7 @@ export const NotFoundPage: React.FC<NotFoundPageProps> = ({ onGoHome }) => {
             className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full bg-white/[0.04] border border-white/[0.08] hover:bg-white/[0.08] text-white text-xs sm:text-sm font-medium transition-colors"
           >
             <MessageSquare className="w-4 h-4 text-emerald-400" />
-            <span>WhatsApp Support</span>
+            <span>Chat with us on WhatsApp</span>
           </a>
         </div>
       </div>

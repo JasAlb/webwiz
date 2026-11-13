@@ -178,7 +178,7 @@ export const ArticlePage: React.FC<ArticlePageProps> = ({ article, onBack, onNav
               className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 text-sm font-medium hover:bg-emerald-500/20 transition-colors"
             >
               <MessageSquare className="w-4 h-4" />
-              <span>Chat on WhatsApp</span>
+              <span>Chat with us on WhatsApp</span>
             </a>
 
             {onNavigateService && (

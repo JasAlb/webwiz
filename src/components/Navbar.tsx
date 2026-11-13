@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, ArrowUpRight, Sparkles, MessageSquare, Phone } from 'lucide-react';
+import { Menu, X, ArrowUpRight, Sparkles, MessageSquare, Mail } from 'lucide-react';
 
 interface NavbarProps {
   isSubpage?: boolean;
@@ -216,19 +216,10 @@ export const Navbar: React.FC<NavbarProps> = ({ isSubpage = false, onNavigateHom
                 <div>
                   <a
                     href="mailto:jassimalbin@gmail.com"
-                    className="font-mono text-accent-soft hover:underline text-xs block"
+                    className="font-mono text-accent-soft hover:underline text-xs flex items-center gap-1.5"
                   >
-                    jassimalbin@gmail.com
-                  </a>
-                </div>
-                <div className="flex flex-col gap-1 pt-1 font-mono text-[11px] text-text-muted">
-                  <a href="tel:+919495068217" className="hover:text-white flex items-center gap-1.5">
-                    <Phone className="w-3 h-3 text-accent" />
-                    <span>Primary: +91 94950 68217</span>
-                  </a>
-                  <a href="tel:+919746859565" className="hover:text-white flex items-center gap-1.5">
-                    <Phone className="w-3 h-3 text-accent-soft" />
-                    <span>Secondary: +91 97468 59565</span>
+                    <Mail className="w-3.5 h-3.5 text-accent" />
+                    <span>jassimalbin@gmail.com</span>
                   </a>
                 </div>
               </div>
@@ -238,17 +229,17 @@ export const Navbar: React.FC<NavbarProps> = ({ isSubpage = false, onNavigateHom
                   href="https://wa.me/qr/5KENGAMJCDTUH1?s=r"
                   target="_blank"
                   rel="noopener noreferrer"
-                  aria-label="Chat with WebWizards on WhatsApp"
-                  className="flex items-center justify-center gap-2 py-3 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-sm font-medium hover:bg-emerald-500/20 transition-colors"
+                  aria-label="Chat with us on WhatsApp"
+                  className="flex items-center justify-center gap-2 py-3 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-medium hover:bg-emerald-500/20 transition-colors"
                 >
                   <MessageSquare className="w-4 h-4" />
-                  <span>WhatsApp</span>
+                  <span>WhatsApp Chat</span>
                 </a>
 
                 <a
                   href="#contact"
                   onClick={(e) => handleNavClick(e, '#contact')}
-                  className="flex items-center justify-center gap-2 py-3 rounded-xl bg-accent text-white text-sm font-medium shadow-[0_0_20px_rgba(139,92,246,0.3)]"
+                  className="flex items-center justify-center gap-2 py-3 rounded-xl bg-accent text-white text-xs font-medium shadow-[0_0_20px_rgba(139,92,246,0.3)]"
                 >
                   <Sparkles className="w-4 h-4" />
                   <span>Start Project</span>

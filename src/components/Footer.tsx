@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ArrowUp, MessageSquare, Mail, Phone, Globe2, BookOpen } from 'lucide-react';
+import { ArrowUp, MessageSquare, Mail, Globe2, BookOpen } from 'lucide-react';
 import { SERVICE_PAGES_DATA, ARTICLES_DATA } from '../data/seoData';
 
 interface FooterProps {
@@ -179,46 +179,28 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
           <div className="lg:col-span-3 space-y-6">
             <div className="space-y-3">
               <h4 className="text-xs font-mono uppercase tracking-wider text-white font-semibold">
-                Direct Contact
+                Official Contact
               </h4>
-              <ul className="space-y-2.5 text-xs">
-                <li>
-                  <a
-                    href="mailto:jassimalbin@gmail.com"
-                    className="flex items-center gap-2 text-text-secondary hover:text-white transition-colors group"
-                  >
-                    <Mail className="w-4 h-4 text-accent shrink-0" />
-                    <span className="font-mono group-hover:underline">jassimalbin@gmail.com</span>
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="tel:+919495068217"
-                    className="flex items-center gap-2 text-text-secondary hover:text-white transition-colors group"
-                  >
-                    <Phone className="w-4 h-4 text-accent shrink-0" />
-                    <span className="font-mono">+91 94950 68217</span>
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="tel:+919746859565"
-                    className="flex items-center gap-2 text-text-secondary hover:text-white transition-colors group"
-                  >
-                    <Phone className="w-4 h-4 text-accent-soft shrink-0" />
-                    <span className="font-mono">+91 97468 59565</span>
-                  </a>
-                </li>
+              <ul className="space-y-3 text-xs">
                 <li>
                   <a
                     href="https://wa.me/qr/5KENGAMJCDTUH1?s=r"
                     target="_blank"
                     rel="noopener noreferrer"
-                    aria-label="Chat with WebWizards on WhatsApp"
-                    className="flex items-center gap-2 text-emerald-400 hover:text-emerald-300 transition-colors"
+                    aria-label="Chat with us on WhatsApp"
+                    className="flex items-center gap-2.5 text-emerald-400 hover:text-emerald-300 transition-colors group"
                   >
                     <MessageSquare className="w-4 h-4 shrink-0" />
-                    <span className="font-mono">WhatsApp Official Chat</span>
+                    <span className="font-mono">Chat with us on WhatsApp</span>
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="mailto:jassimalbin@gmail.com"
+                    className="flex items-center gap-2.5 text-text-secondary hover:text-white transition-colors group"
+                  >
+                    <Mail className="w-4 h-4 text-accent shrink-0" />
+                    <span className="font-mono group-hover:underline">jassimalbin@gmail.com</span>
                   </a>
                 </li>
               </ul>

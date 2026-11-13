@@ -84,7 +84,7 @@ export const CtaSection: React.FC = () => {
             className="inline-flex items-center gap-2 px-6 py-4 rounded-full bg-white/[0.03] hover:bg-white/[0.08] border border-white/[0.1] text-text-secondary hover:text-white text-sm font-medium transition-colors"
           >
             <MessageSquare className="w-4 h-4 text-emerald-400" />
-            <span>Chat via WhatsApp</span>
+            <span>Chat with us on WhatsApp</span>
           </a>
         </motion.div>
       </div>

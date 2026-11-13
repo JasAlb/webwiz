@@ -18,7 +18,7 @@ export const FloatingWhatsApp: React.FC = () => {
             className="hidden sm:flex items-center gap-2 px-3.5 py-2 rounded-xl bg-[#11131A]/95 border border-white/10 backdrop-blur-xl shadow-2xl text-xs text-white"
           >
             <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-            <span className="font-mono">Chat on WhatsApp</span>
+            <span className="font-mono">Chat with us on WhatsApp</span>
             <button
               onClick={() => setShowTooltip(false)}
               className="text-text-muted hover:text-white ml-1"

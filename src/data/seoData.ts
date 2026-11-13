@@ -81,7 +81,7 @@ export const FAQS_DATA: FaqItem[] = [
   {
     category: 'Getting Started',
     question: 'How can a business get started with WebWizards?',
-    answer: 'Getting started is straightforward: you can either submit your project requirements through our online enquiry form, chat with our founders directly on WhatsApp (+91 94950 68217 / +91 97468 59565), or email us at jassimalbin@gmail.com. We review your requirements and provide a detailed scope breakdown, fixed timeline, and transparent INR cost proposal within 24 hours.'
+    answer: 'Getting started is straightforward: you can either submit your project requirements through our online enquiry form, chat with our founders directly on WhatsApp, or email us at jassimalbin@gmail.com. We review your requirements and provide a detailed scope breakdown, fixed timeline, and transparent INR cost proposal within 24 hours.'
   }
 ];
 

@@ -159,7 +159,7 @@ export const FaqSection: React.FC<FaqSectionProps> = ({
             className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-emerald-500/20 hover:bg-emerald-500/30 border border-emerald-500/40 text-emerald-300 text-xs font-semibold transition-all shrink-0"
           >
             <MessageSquare className="w-3.5 h-3.5" />
-            <span>Ask on WhatsApp</span>
+            <span>Chat with us on WhatsApp</span>
             <ArrowRight className="w-3.5 h-3.5" />
           </a>
         </div>
