@@ -79,7 +79,7 @@ export const Hero: React.FC = () => {
         >
           <Sparkles className="w-3.5 h-3.5 text-accent-soft animate-spin-slow" />
           <span className="text-xs sm:text-sm font-medium tracking-wide text-text-secondary">
-            Professional Website Development Studio <span className="text-white font-semibold">WebWizards</span>
+            Website Design & Development Agency <span className="text-white font-semibold">WebWizards</span>
           </span>
           <span className="text-xs text-accent font-mono uppercase tracking-wider pl-1 border-l border-white/10">
             India & Global
@@ -94,7 +94,7 @@ export const Hero: React.FC = () => {
             transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
             className="block text-gradient-silver"
           >
-            WE DON'T JUST BUILD WEBSITES.
+            BUILDING POWERFUL DIGITAL EXPERIENCES
           </motion.span>
           <motion.span
             initial={{ opacity: 0, y: 35 }}
@@ -102,7 +102,7 @@ export const Hero: React.FC = () => {
             transition={{ duration: 0.8, delay: 0.25, ease: [0.16, 1, 0.3, 1] }}
             className="block mt-1 sm:mt-2 text-gradient-violet drop-shadow-[0_0_40px_rgba(139,92,246,0.35)]"
           >
-            WE BUILD DIGITAL EXPERIENCES.
+            FOR MODERN BUSINESSES.
           </motion.span>
         </h1>
 
@@ -113,7 +113,7 @@ export const Hero: React.FC = () => {
           transition={{ duration: 0.7, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
           className="mt-8 text-base sm:text-xl md:text-2xl text-text-secondary max-w-3xl font-light leading-relaxed tracking-normal"
         >
-          WebWizards is a professional website development company crafting custom business websites, high-performance e-commerce platforms, and scalable web applications for businesses in India and worldwide.
+          WebWizards creates modern websites for businesses and startups. Explore website design, custom development, e-commerce, SEO and website maintenance services engineered for real business growth.
         </motion.p>
 
         {/* Action CTAs */}

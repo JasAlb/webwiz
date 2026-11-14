@@ -22,9 +22,31 @@ import { NotFoundPage } from './components/NotFoundPage';
 import { SERVICE_PAGES_DATA, ARTICLES_DATA } from './data/seoData';
 
 const BASE_URL = 'https://www.webwizards.world';
-const DEFAULT_TITLE = 'WebWizards | Professional Website Development & Digital Solutions';
+const DEFAULT_TITLE = 'WebWizards | Website Design & Development Agency';
 const DEFAULT_DESC =
-  'WebWizards builds modern business websites, e-commerce platforms and custom web applications. Explore our digital solutions and start your project.';
+  'WebWizards creates modern websites for businesses and startups. Explore website design, custom development, e-commerce, SEO and website maintenance services.';
+
+const SERVICE_ALIASES: Record<string, string> = {
+  'website-development': 'website-development',
+  'website-design': 'ui-ux-design',
+  'ui-ux-design': 'ui-ux-design',
+  'ecommerce-development': 'ecommerce-development',
+  'seo-services': 'seo-optimization',
+  'seo-optimization': 'seo-optimization',
+  'website-redesign': 'website-redesign',
+  'website-maintenance': 'website-maintenance',
+  'web-applications': 'web-applications',
+};
+
+const SECTION_HASH_MAP: Record<string, string> = {
+  '/about': '#about',
+  '/services': '#services',
+  '/portfolio': '#work',
+  '/work': '#work',
+  '/blog': '#insights',
+  '/insights': '#insights',
+  '/contact': '#contact',
+};
 
 export const App: React.FC = () => {
   const [loadingComplete, setLoadingComplete] = useState(false);
@@ -70,13 +92,32 @@ export const App: React.FC = () => {
       if (twUrl) twUrl.setAttribute('content', canonicalUrl);
     };
 
-    if (currentPath === '/' || currentPath === '') {
+    const rawPath = currentPath.replace(/\/$/, '') || '/';
+    const cleanSlug = rawPath.replace(/^\//, '');
+    const sectionHash = SECTION_HASH_MAP[rawPath];
+
+    if (rawPath === '/' || sectionHash) {
       updateMetaTags(DEFAULT_TITLE, DEFAULT_DESC, `${BASE_URL}/`);
+      if (sectionHash) {
+        setTimeout(() => {
+          const el = document.querySelector(sectionHash);
+          if (el) el.scrollIntoView({ behavior: 'smooth' });
+        }, 150);
+      }
     } else if (currentPath.startsWith('/services/')) {
       const slug = currentPath.replace('/services/', '').replace(/\/$/, '');
-      const service = SERVICE_PAGES_DATA[slug];
+      const targetSlug = SERVICE_ALIASES[slug] || slug;
+      const service = SERVICE_PAGES_DATA[targetSlug];
       if (service) {
-        updateMetaTags(service.metaTitle, service.metaDescription, `${BASE_URL}/services/${slug}`);
+        updateMetaTags(service.metaTitle, service.metaDescription, `${BASE_URL}/services/${targetSlug}`);
+      } else {
+        updateMetaTags('404: Service Not Found | WebWizards', 'The requested service was not found.', `${BASE_URL}/`);
+      }
+    } else if (SERVICE_ALIASES[cleanSlug]) {
+      const targetSlug = SERVICE_ALIASES[cleanSlug];
+      const service = SERVICE_PAGES_DATA[targetSlug];
+      if (service) {
+        updateMetaTags(service.metaTitle, service.metaDescription, `${BASE_URL}/services/${targetSlug}`);
       } else {
         updateMetaTags('404: Service Not Found | WebWizards', 'The requested service was not found.', `${BASE_URL}/`);
       }
@@ -114,13 +155,23 @@ export const App: React.FC = () => {
     const fullPath = hash ? `${path}${hash}` : path;
     window.history.pushState({}, '', fullPath);
     setCurrentPath(path);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    if (hash) {
+      setTimeout(() => {
+        const el = document.querySelector(hash);
+        if (el) el.scrollIntoView({ behavior: 'smooth' });
+      }, 150);
+    } else {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
   };
 
   // Route Resolver
   const renderCurrentView = () => {
-    // 1. Homepage
-    if (currentPath === '/' || currentPath === '') {
+    const rawPath = currentPath.replace(/\/$/, '') || '/';
+    const cleanSlug = rawPath.replace(/^\//, '');
+
+    // 1. Homepage or Section Shortcuts (/about, /services, /portfolio, /blog, /contact)
+    if (rawPath === '/' || SECTION_HASH_MAP[rawPath]) {
       return (
         <main className="relative z-10">
           <Hero />
@@ -137,11 +188,17 @@ export const App: React.FC = () => {
       );
     }
 
-    // 2. Service Pages: /services/:slug
+    // 2. Service Pages: /services/:slug OR direct /website-design, /website-development, etc.
+    let targetServiceSlug: string | null = null;
     if (currentPath.startsWith('/services/')) {
       const slug = currentPath.replace('/services/', '').replace(/\/$/, '');
-      const service = SERVICE_PAGES_DATA[slug];
+      targetServiceSlug = SERVICE_ALIASES[slug] || slug;
+    } else if (SERVICE_ALIASES[cleanSlug]) {
+      targetServiceSlug = SERVICE_ALIASES[cleanSlug];
+    }
 
+    if (targetServiceSlug) {
+      const service = SERVICE_PAGES_DATA[targetServiceSlug];
       if (service) {
         return (
           <ServicePage
@@ -156,6 +213,7 @@ export const App: React.FC = () => {
             onOpenProject={() => {
               navigate('/', '#work');
             }}
+            onNavigateService={(srvSlug) => navigate(`/services/${srvSlug}`)}
           />
         );
       }

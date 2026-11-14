@@ -17,7 +17,18 @@ export const FaqSection: React.FC<FaqSectionProps> = ({
   const [openIndex, setOpenIndex] = useState<number | null>(0);
   const [selectedCategory, setSelectedCategory] = useState<string>(categoryFilter || 'All');
 
-  const categories = ['All', 'Pricing & Cost', 'Timeline', 'Scope & Inclusions', 'Website Redesign', 'E-Commerce', 'Getting Started'];
+  const categories = [
+    'All',
+    'Capabilities',
+    'Pricing & Cost',
+    'Timeline',
+    'Website Design',
+    'E-Commerce',
+    'SEO Services',
+    'Website Redesign',
+    'Maintenance',
+    'International'
+  ];
 
   const filteredFaqs = FAQS_DATA.filter((faq) => {
     if (selectedCategory === 'All') return true;

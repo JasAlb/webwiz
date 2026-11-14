@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { ServicePageData } from '../data/seoData';
+import { ServicePageData, SERVICE_PAGES_DATA } from '../data/seoData';
 import { PROJECTS_DATA } from '../data/agencyData';
 import {
   ArrowLeft,
@@ -18,6 +18,7 @@ interface ServicePageProps {
   onBack: () => void;
   onInquire: (serviceTitle: string) => void;
   onOpenProject: (projectId: string) => void;
+  onNavigateService?: (slug: string) => void;
 }
 
 export const ServicePage: React.FC<ServicePageProps> = ({
@@ -25,6 +26,7 @@ export const ServicePage: React.FC<ServicePageProps> = ({
   onBack,
   onInquire,
   onOpenProject,
+  onNavigateService,
 }) => {
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -34,6 +36,9 @@ export const ServicePage: React.FC<ServicePageProps> = ({
   const relatedProjectsList = PROJECTS_DATA.filter((p) =>
     service.relatedProjects.includes(p.id)
   );
+
+  const allServices = Object.values(SERVICE_PAGES_DATA);
+  const relatedServices = allServices.filter((s) => s.slug !== service.slug).slice(0, 3);
 
   return (
     <article className="min-h-screen pt-28 pb-24 px-6 sm:px-8 bg-[#08090D] relative z-10 text-white">
@@ -296,6 +301,44 @@ export const ServicePage: React.FC<ServicePageProps> = ({
                   {faq.answer}
                 </p>
               </div>
+            ))}
+          </div>
+        </section>
+
+        {/* Contextual Internal Linking: Related Services Topic Cluster */}
+        <section className="mb-16 p-8 rounded-3xl bg-white/[0.02] border border-white/[0.06]">
+          <span className="text-xs font-mono uppercase tracking-wider text-accent-soft block mb-1">
+            Topic Cluster & Capabilities
+          </span>
+          <h2 className="font-display font-bold text-xl sm:text-2xl text-white mb-6">
+            Explore Related Digital Capabilities
+          </h2>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            {relatedServices.map((rel) => (
+              <a
+                key={rel.slug}
+                href={`/services/${rel.slug}`}
+                onClick={(e) => {
+                  e.preventDefault();
+                  if (onNavigateService) {
+                    onNavigateService(rel.slug);
+                  } else {
+                    window.history.pushState({}, '', `/services/${rel.slug}`);
+                    window.dispatchEvent(new PopStateEvent('popstate'));
+                  }
+                }}
+                className="p-5 rounded-2xl bg-[#11131A] border border-white/[0.06] hover:border-accent/40 hover:bg-white/[0.03] transition-all group block"
+              >
+                <div className="flex items-center justify-between mb-2">
+                  <span className="text-sm font-semibold text-white group-hover:text-accent-soft transition-colors line-clamp-1">
+                    {rel.title}
+                  </span>
+                  <ArrowRight className="w-3.5 h-3.5 text-text-muted group-hover:text-white group-hover:translate-x-0.5 transition-all shrink-0" />
+                </div>
+                <p className="text-xs text-text-muted line-clamp-2 leading-relaxed">
+                  {rel.shortDesc}
+                </p>
+              </a>
             ))}
           </div>
         </section>

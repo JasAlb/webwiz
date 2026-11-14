@@ -54,34 +54,54 @@ export interface ArticleItem {
 
 export const FAQS_DATA: FaqItem[] = [
   {
+    category: 'Capabilities',
+    question: 'What services does WebWizards provide?',
+    answer: 'WebWizards provides end-to-end digital design and web engineering services including Website Design (bespoke Figma UI/UX design systems), Custom Website Development (React, TypeScript, Next.js), E-Commerce Website Development (Shopify and custom headless stores with payment gateways), Search Engine Optimization (Technical SEO and on-page optimization), Website Redesign (modernizations with 100% SEO migration), and Ongoing Website Maintenance & Support (24/7 uptime monitoring and security patching).'
+  },
+  {
     category: 'Pricing & Cost',
-    question: 'How much does website development cost in India?',
-    answer: 'At WebWizards, website development costs in India range from ₹14,999 to ₹1,19,999+ depending on complexity. A standard 5–8 page business website or redesign starts at ₹14,999 – ₹29,999. A bespoke flagship website with custom animations and editorial UI/UX costs ₹29,999 – ₹59,999. Custom e-commerce platforms with payment gateway integrations range from ₹59,999 – ₹1,19,999. Enterprise-scale web applications with custom backends and real-time dashboards start at ₹1,19,999+. We work on a transparent, fixed-price milestone model with zero hidden retainers.'
+    question: 'How much does a business website cost?',
+    answer: 'Website development costs at WebWizards range from ₹14,999 to ₹1,19,999+ (approx. $200 – $1,500+ USD) depending on technical complexity. A standard 5–8 page business website starts at ₹14,999 – ₹29,999. A bespoke flagship website with custom animations and editorial UI/UX costs ₹29,999 – ₹59,999. Custom e-commerce platforms with payment gateway integrations range from ₹59,999 – ₹1,19,999. Enterprise-scale web applications start at ₹1,19,999+. We operate on a transparent, milestone-based fixed price model with zero hidden fees.'
   },
   {
     category: 'Timeline',
-    question: 'How long does website development take from start to launch?',
-    answer: 'A standard custom business website typically takes 2 to 3 weeks from discovery to production launch. A high-end custom flagship website or e-commerce store requires 3 to 5 weeks. Complex web applications with authentication, custom APIs, and dashboard analytics take 5 to 8 weeks. We divide every project into 4 structured phases (Discover, Design, Develop, Launch) with weekly milestones and staging previews.'
+    question: 'How long does website development take?',
+    answer: 'A standard custom business website typically takes 2 to 3 weeks from discovery to production launch. A high-end custom flagship website or e-commerce store requires 3 to 5 weeks. Complex web applications with authentication, custom APIs, and dashboard analytics take 5 to 8 weeks. We divide every project into 4 structured phases (Discover, Design, Develop, Launch) with weekly milestone reviews and staging previews.'
   },
   {
-    category: 'Scope & Inclusions',
-    question: 'What is included in a business website developed by WebWizards?',
-    answer: 'Every business website we deliver includes 100% custom-crafted responsive code (no generic builder templates), bespoke Figma UI/UX design, mobile-first touch ergonomics, sub-second page speed optimization (95+ Google PageSpeed), technical SEO setup (semantic HTML, Schema.org JSON-LD, sitemaps, robots.txt), WhatsApp chat integration, custom lead-capture forms, SSL certificate installation, cross-browser compatibility testing, and 30 days of post-launch technical warranty.'
-  },
-  {
-    category: 'Website Redesign',
-    question: 'Can WebWizards redesign an existing website without losing SEO rankings?',
-    answer: 'Yes. Our website redesign service includes a comprehensive legacy SEO audit before touching any code. We map all existing URLs, maintain existing URL slugs or configure seamless 301 redirects to eliminate 404 errors, migrate all existing metadata, and rebuild the front end using modern React and clean code. Clients typically experience an immediate boost in Google rankings due to improved Core Web Vitals and lower bounce rates.'
+    category: 'Website Design',
+    question: 'What is included in website design?',
+    answer: 'Every website design project includes bespoke Figma design systems (no generic pre-made templates), responsive mobile and desktop viewports, interactive prototypes, typography hierarchy, user journey mapping, accessibility compliance (WCAG 2.1 AA), and brand visual guidelines. We design interfaces engineered around conversion psychology to turn visitors into inquiries.'
   },
   {
     category: 'E-Commerce',
-    question: 'Does WebWizards develop custom e-commerce websites with Indian payment gateways?',
-    answer: 'Yes. We build high-converting e-commerce storefronts using Shopify, custom headless commerce, or full-stack React platforms. We integrate all major Indian and international payment gateways including Razorpay, Cashfree, Stripe, and UPI (Google Pay, PhonePe, Paytm). Our e-commerce builds feature one-page checkout optimization, real-time inventory management, automated invoice generation, and lightning-fast mobile shopping.'
+    question: 'Can WebWizards build an online store?',
+    answer: 'Yes. We engineer high-converting e-commerce storefronts using Shopify, custom headless commerce, or full-stack React platforms. We integrate all major Indian and international payment gateways including Razorpay, Cashfree, Stripe, PayPal, and UPI (Google Pay, PhonePe, Paytm). Our e-commerce builds feature one-page checkout optimization, real-time inventory management, automated invoice generation, and mobile-first touch shopping ergonomics.'
   },
   {
-    category: 'Getting Started',
-    question: 'How can a business get started with WebWizards?',
-    answer: 'Getting started is straightforward: you can either submit your project requirements through our online enquiry form, chat with our founders directly on WhatsApp, or email us at jassimalbin@gmail.com. We review your requirements and provide a detailed scope breakdown, fixed timeline, and transparent INR cost proposal within 24 hours.'
+    category: 'SEO Services',
+    question: 'Does WebWizards provide SEO services?',
+    answer: 'Yes. WebWizards provides comprehensive Technical and On-Page SEO services. We engineer clean semantic HTML5 markup, Schema.org JSON-LD multi-entity graphs (Organization, WebSite, Service, BreadcrumbList, Article), XML sitemaps, robots.txt crawl configurations, sub-second Core Web Vitals speed optimization, and keyword architecture. We focus on sustainable, white-hat technical foundation for Google, Bing, and AI search engines.'
+  },
+  {
+    category: 'Website Redesign',
+    question: 'Can an existing website be redesigned?',
+    answer: 'Yes. Our website redesign service includes a comprehensive legacy SEO audit before touching any code. We map all existing URLs, maintain existing URL slugs or configure seamless 301 redirects to eliminate 404 errors, migrate all existing metadata, and rebuild the front end using modern React and clean code. Clients typically experience an immediate boost in Google rankings due to improved Core Web Vitals and lower bounce rates.'
+  },
+  {
+    category: 'Maintenance',
+    question: 'Does WebWizards provide maintenance?',
+    answer: 'Yes. We provide proactive ongoing website maintenance and technical support starting at ₹4,999 / month. Our maintenance plans include 24/7 automated uptime and health monitoring, daily encrypted offsite cloud backups, regular dependency and security patching, SSL certificate renewal, Core Web Vitals speed audits, and dedicated developer hours for content updates and technical bug fixes.'
+  },
+  {
+    category: 'International',
+    question: 'Does WebWizards work with international clients?',
+    answer: 'Yes. While WebWizards is headquartered in India (serving Bengaluru, Mumbai, Delhi NCR, Hyderabad, Chennai, and Kerala), we actively collaborate with international businesses and startups across the United States, United Kingdom, UAE (Dubai), Australia, and Europe. We operate seamlessly across global timezones using asynchronous Slack/WhatsApp collaboration, staging previews, and milestone billing.'
+  },
+  {
+    category: 'Contact & Onboarding',
+    question: 'How can customers contact WebWizards?',
+    answer: 'Customers can connect directly with our founding technical team via official WhatsApp chat at https://wa.me/qr/5KENGAMJCDTUH1?s=r or email us at jassimalbin@gmail.com. You can also submit an enquiry through our online project form. We review all requirements and deliver a detailed scope breakdown, delivery timeline, and transparent cost proposal within 24 hours.'
   }
 ];
 
