@@ -21,7 +21,7 @@ import { ArticlePage } from './components/ArticlePage';
 import { NotFoundPage } from './components/NotFoundPage';
 import { SERVICE_PAGES_DATA, ARTICLES_DATA } from './data/seoData';
 
-const BASE_URL = 'https://webwizards.agency';
+const BASE_URL = 'https://www.webwizards.world';
 const DEFAULT_TITLE = 'WebWizards | Professional Website Development & Digital Solutions';
 const DEFAULT_DESC =
   'WebWizards builds modern business websites, e-commerce platforms and custom web applications. Explore our digital solutions and start your project.';

@@ -99,8 +99,11 @@ export const Portfolio: React.FC = () => {
                     <div className="aspect-[16/10] sm:aspect-[16/9] w-full overflow-hidden relative">
                       <img
                         src={project.heroImage}
-                        alt={project.name}
+                        alt={`${project.name} - ${project.industry} | WebWizards Case Study`}
                         loading="lazy"
+                        decoding="async"
+                        width="800"
+                        height="500"
                         className="w-full h-full object-cover object-center transform transition-transform duration-700 ease-out group-hover:scale-105"
                       />
 

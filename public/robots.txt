@@ -1,14 +1,27 @@
 User-agent: *
 Allow: /
 
-# Search Engine & AI Retrieval Agents
+# Primary Search Engine Crawlers
 User-agent: Googlebot
 Allow: /
 
 User-agent: Bingbot
 Allow: /
 
+User-agent: DuckDuckBot
+Allow: /
+
+User-agent: Slurp
+Allow: /
+
+User-agent: YandexBot
+Allow: /
+
+# Generative AI & Retrieval Search Agents
 User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
 Allow: /
 
 User-agent: PerplexityBot
@@ -20,4 +33,4 @@ Allow: /
 User-agent: Applebot
 Allow: /
 
-Sitemap: https://webwizards.agency/sitemap.xml
+Sitemap: https://www.webwizards.world/sitemap.xml

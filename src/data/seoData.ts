@@ -522,6 +522,84 @@ export const SERVICE_PAGES_DATA: Record<string, ServicePageData> = {
       }
     ],
     relatedProjects: ['kroma-architecture', 'verdant-botanic', 'aetheria-horlogerie']
+  },
+
+  'website-maintenance': {
+    slug: 'website-maintenance',
+    title: 'Website Maintenance & Support',
+    metaTitle: 'Website Maintenance & Support Services in India | WebWizards',
+    metaDescription: 'Reliable website maintenance and ongoing technical support services in India & worldwide. 24/7 uptime monitoring, security patching, speed audits, and bug fixes from ₹4,999/mo.',
+    h1: 'Website Maintenance & Ongoing Technical Support Services',
+    subtitle: 'Proactive security, uptime observability, and sub-second speed maintenance for business-critical websites.',
+    shortDesc: 'Continuous website maintenance, security updates, uptime monitoring, and sub-second performance optimization to keep your digital flagship running smoothly.',
+    overview: 'A website is not a static project; it is a live business asset that requires continuous technical care. Outdated dependencies, expired certificates, unmonitored server outages, and slow page loads directly cost businesses clients and search engine rankings. WebWizards provides proactive, white-glove website maintenance services for businesses in India and worldwide. We handle daily backups, security patching, uptime observability, speed audits, and ongoing technical improvements so you can focus entirely on growing your business.',
+    startingPrice: '₹4,999 / mo',
+    timeline: 'Continuous / 24–48h SLA',
+    benefits: [
+      {
+        title: '24/7 Uptime & Health Monitoring',
+        description: 'Automated health checks every 60 seconds with instant outage alerts and zero-downtime failover protocols.'
+      },
+      {
+        title: 'Proactive Security Patching',
+        description: 'Continuous library updates, vulnerability shielding, SSL certificate renewal, and automated daily encrypted cloud backups.'
+      },
+      {
+        title: 'Core Web Vitals & Speed Maintenance',
+        description: 'Regular Lighthouse performance audits, cache tuning, image compression, and database query optimization.'
+      },
+      {
+        title: 'Dedicated Content & Technical Support',
+        description: 'Rapid turnaround for copy edits, banner updates, new page additions, and technical bug fixes with zero retainer lock-in.'
+      }
+    ],
+    deliverables: [
+      'Automated 24/7 Uptime & Downtime Alerting System',
+      'Daily Encrypted Offsite Cloud Backups (30-day retention)',
+      'Core Web Vitals & Sub-Second Speed Maintenance Audits',
+      'Regular Security Scans & NPM/Dependency Patching',
+      'SSL Certificate Monitoring & HTTPS Verification',
+      'Dedicated Developer Support Hours for Content & UI Tweaks',
+      'Monthly Technical Health & Performance Reports'
+    ],
+    techStack: ['Vercel', 'Cloudflare', 'GitHub Actions', 'Lighthouse', 'Node.js', 'React'],
+    processSteps: [
+      {
+        step: '01',
+        title: 'Baseline Audit & Onboarding',
+        description: 'We inspect your existing code repository, security configurations, DNS setup, and performance benchmarks.'
+      },
+      {
+        step: '02',
+        title: 'Monitoring & Backup Automation',
+        description: 'We install automated health monitors, configure encrypted daily backups, and set up staging environments.'
+      },
+      {
+        step: '03',
+        title: 'Scheduled Maintenance Cycles',
+        description: 'We perform weekly dependency reviews, security patches, cache optimizations, and broken link scans.'
+      },
+      {
+        step: '04',
+        title: 'On-Demand Support & Reporting',
+        description: 'You receive direct access to our engineering team via WhatsApp and Email for rapid updates and monthly health reports.'
+      }
+    ],
+    faqs: [
+      {
+        question: 'What is included in WebWizards website maintenance?',
+        answer: 'Every maintenance plan includes 24/7 uptime monitoring, daily encrypted cloud backups, security patching, SSL management, Core Web Vitals speed optimization, and dedicated developer hours for content and feature updates.'
+      },
+      {
+        question: 'Can WebWizards maintain a website built by another agency?',
+        answer: 'Yes. We conduct an initial code and architecture audit of your existing website, identify any technical debt or vulnerabilities, and transition your site into our proactive maintenance workflow.'
+      },
+      {
+        question: 'How quickly are emergency technical issues or bugs resolved?',
+        answer: 'Critical issues (such as downtime or broken forms) receive immediate priority response within 2 to 4 hours. Standard content and UI requests are completed within 24 to 48 business hours.'
+      }
+    ],
+    relatedProjects: ['kroma-architecture', 'synthetix-ai', 'verdant-botanic']
   }
 };
 

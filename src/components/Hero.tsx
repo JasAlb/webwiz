@@ -79,7 +79,7 @@ export const Hero: React.FC = () => {
         >
           <Sparkles className="w-3.5 h-3.5 text-accent-soft animate-spin-slow" />
           <span className="text-xs sm:text-sm font-medium tracking-wide text-text-secondary">
-            Award-Caliber Digital Studio <span className="text-white font-semibold">WebWizards</span>
+            Professional Website Development Studio <span className="text-white font-semibold">WebWizards</span>
           </span>
           <span className="text-xs text-accent font-mono uppercase tracking-wider pl-1 border-l border-white/10">
             India & Global
@@ -113,7 +113,7 @@ export const Hero: React.FC = () => {
           transition={{ duration: 0.7, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
           className="mt-8 text-base sm:text-xl md:text-2xl text-text-secondary max-w-3xl font-light leading-relaxed tracking-normal"
         >
-          We transform ambitious ideas into powerful digital experiences that help businesses grow, connect, and stand out.
+          WebWizards is a professional website development company crafting custom business websites, high-performance e-commerce platforms, and scalable web applications for businesses in India and worldwide.
         </motion.p>
 
         {/* Action CTAs */}

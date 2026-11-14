@@ -69,7 +69,10 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
             <div className="relative rounded-2xl overflow-hidden border border-white/[0.08] aspect-video sm:aspect-[21/9] bg-[#08090D]">
               <img
                 src={project.heroImage}
-                alt={project.name}
+                alt={`${project.name} - ${project.industry} Showcase`}
+                width="1200"
+                height="675"
+                decoding="async"
                 className="w-full h-full object-cover"
                 loading="lazy"
               />

@@ -35,7 +35,8 @@ const serviceSlugMap: Record<string, string> = {
   'ui-ux-design': 'ui-ux-design',
   'web-applications': 'web-applications',
   'seo-optimization': 'seo-optimization',
-  'website-redesign': 'website-redesign'
+  'website-redesign': 'website-redesign',
+  'website-maintenance': 'website-maintenance'
 };
 
 export const Services: React.FC<ServicesProps> = ({ onNavigateService }) => {
@@ -235,9 +236,9 @@ export const Services: React.FC<ServicesProps> = ({ onNavigateService }) => {
 
                 {/* Deliverables Checklist */}
                 <div className="mb-8">
-                  <h5 className="text-xs font-mono uppercase tracking-wider text-text-muted mb-3">
+                  <h4 className="text-xs font-mono uppercase tracking-wider text-text-muted mb-3">
                     Key Deliverables & Specifications
-                  </h5>
+                  </h4>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
                     {selectedService.deliverables.map((item, idx) => (
                       <div key={idx} className="flex items-center gap-2.5 text-xs sm:text-sm text-text-secondary">

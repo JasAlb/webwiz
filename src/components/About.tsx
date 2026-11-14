@@ -61,7 +61,10 @@ export const About: React.FC = () => {
             <div className="relative rounded-3xl overflow-hidden border border-white/[0.1] bg-[#11131A] shadow-2xl">
               <img
                 src="https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&w=900&q=80"
-                alt="WebWizards Studio Craftsmanship"
+                alt="WebWizards Digital Studio Craftsmanship and Engineering Workspace"
+                width="900"
+                height="600"
+                decoding="async"
                 className="w-full h-80 sm:h-96 object-cover opacity-85"
                 loading="lazy"
               />
